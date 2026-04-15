@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feed</title>
+
+    <style>
+    body {
+        margin: 0;
+        font-family: "Comic Sans MS", cursive;
+        min-height: 100vh;
+    }
+
+    /* BACKGROUND (FULL SCREEN WITH TRANSPARENCY) */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background: url("/static/images/Sitephotomain.png") no-repeat center;
+        background-size: cover;
+
+        opacity: 0.25;  /* 🔥 control transparency here */
+        z-index: -1;
+    }
+
+    /* LOGO */
+    .logo {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 10;
+    }
+
+    .logo img {
+        height: 80px;
+    }
+
+    /* MAIN FEED CONTAINER */
+    .feed-container {
+        max-width: 500px;
+        margin: 80px auto;
+        padding: 15px;
+
+        background: rgba(255, 255, 255, 0.9); /* readability */
+        border-radius: 10px;
+    }
+
+    /* IMAGE CONTAINER (Instagram style) */
+    .image-container {
+        width: 100%;
+        aspect-ratio: 4 / 5;   /* 🔥 Instagram portrait ratio */
+        background-color: #000;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+/* IMAGE INSIDE CONTAINER */
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;   /* shows full image */
+    }
+
+    .meta {
+        margin-top: 8px;
+        font-size: 14px;
+    }
+
+    .comments {
+        margin-top: 10px;
+    }
+
+    /* RATING */
+    .rating {
+        margin-top: 20px;
+    }
+
+    .scale {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+        font-family: "Comic Sans MS", cursive;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .comment-box {
+        background: #f0f0f0;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+    /* HEADER ALIGNMENT (FIXED) */
+    .post-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .post-user {
+        font-weight: bold;
+        font-size: 16px;
+        color: #000;
+    }
+
+    .participant-user {
+        font-size: 13px;
+        color: #555;   /* dark gray */
+        text-align: right;
+        font-weight: bold;
+        font-style: italic;
+    }
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 600px) {
+        .feed-container {
+            margin: 60px 10px;
+            padding: 10px;
+        }
+
+        .post img {
+            height: 250px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+    
+    }
+</style>
+</head>
+<script id="fixed_timing_script">
+
+    let startTime = Date.now();
+    let firstInteractionTime = null;
+
+    // detect ANY interaction
+    document.addEventListener("click", function() {
+        if (!firstInteractionTime) {
+            firstInteractionTime = Date.now();
+        }
+    });
+
+    // ensure DOM is ready
+    window.onload = function() {
+
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function(e) {
+
+            let submitTime = Date.now();
+
+            let dwellTime = submitTime - startTime;
+            let reactionTime = firstInteractionTime 
+                ? firstInteractionTime - startTime 
+                : dwellTime;  // fallback
+
+            // DEBUG (you can remove later)
+            console.log("Dwell:", dwellTime);
+            console.log("Reaction:", reactionTime);
+
+            document.getElementById("dwell_time").value = dwellTime;
+            document.getElementById("reaction_time").value = reactionTime;
+        });
+    };
+
+</script>
+
+<body>
+
+<div class="logo">
+    <img src="/static/images/site_logo.png">
+</div>
+
+<div class="feed-container">
+
+    <div class="post-header">
+
+    <!-- LEFT: post author -->
+        <div class="post-user">
+            {{ post.username }}
+        </div>
+
+    <!-- RIGHT: participant identity -->
+        <div class="participant-user">
+            {% if condition == "anonymous" %}
+                You are logged in as anonymous
+            {% else %}
+                You are logged in as {{ username }}
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/' + post.image_path) }}">
+    </div>
+
+    <p>{{ post.caption }}</p>
+
+    <div class="meta">
+        ❤️ {{ post.likes }} &nbsp;&nbsp;
+        🔁 {{ post.shares }} &nbsp;&nbsp;
+        💬 {{ post.comment_count }}
+    </div>
+
+    <div class="comments">
+        {% for c in post.comments %}
+            <div class="comment-box">
+                {{ c }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" class="rating">
+
+        <p><strong>How harmful is this social media interaction?</strong></p>
+        <p style="font-size: 12px;">No harm at all ----------------------------->----------------------------- A great deal of harm</p>
+
+        <div class="scale">
+            {% for i in range(1,8) %}
+                <label>
+                    <input type="radio" name="rating" value="{{ i }}" required>
+                    {{ i }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Next</button>
+        <input type="hidden" name="dwell_time" id="dwell_time">
+        <input type="hidden" name="reaction_time" id="reaction_time">
+        <input type="hidden" name="post_id" value="{{ post.post_id }}">
+        <input type="hidden" name="condition_tag" value="{{ post.condition_tag }}">
+
+    </form>
+
+</div>
+
+</body>
+</html>

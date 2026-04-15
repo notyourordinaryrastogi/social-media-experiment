@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Survey</title>
+
+<style>
+body {
+    font-family: "Comic Sans MS", cursive;
+    background: #f5f5f5;
+}
+
+.container {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.section {
+    margin-bottom: 35px;
+}
+
+.break {
+    text-align: center;
+    margin: 30px 0;
+    font-style: italic;
+    color: #555;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+}
+
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<form method="POST">
+
+<!-- ================= DEMOGRAPHICS ================= -->
+<div class="section">
+<h3>Basic Information</h3>
+
+<label>Age</label>
+<input type="number" name="age" required>
+
+<label>Gender</label>
+<select name="gender" required>
+    <option value="" disabled selected>Select</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+</select>
+</div>
+
+<div class="break">Take a short breath before continuing.</div>
+
+<!-- ================= USAGE ================= -->
+<div class="section">
+<h3>Social Media Usage</h3>
+
+<label>Weekday usage</label>
+<select name="weekday_use" required>
+    <option value="" disabled selected>Select</option>
+    <option value="0">Less than 1 hours</option>
+    <option value="1">1 hour</option>
+    <option value="2">2 hours</option>
+    <option value="3">3 hours</option>
+    <option value="4">4 hours</option>
+    <option value="5">5+ hours</option>
+</select>
+
+<label>Weekend usage</label>
+<select name="weekend_use" required>
+    <option value="" disabled selected>Select</option>
+    <option value="0">Less than 1 hour</option>
+    <option value="1">1 hour</option>
+    <option value="2">2 hours</option>
+    <option value="3">3 hours</option>
+    <option value="4">4 hours</option>
+    <option value="5">5+ hours</option>
+</select>
+
+<label>You spend a lot of time thinking about social media</label>
+<select name="sm_thinking" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+
+<label>You feel an urge to use social media more and more</label>
+<select name="sm_urge" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+
+<label>You use social media to forget about personal problems</label>
+<select name="sm_escape" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+
+<label>You have tried to cut down but failed</label>
+<select name="sm_control" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+
+<label>You feel restless if unable to use social media</label>
+<select name="sm_restless" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+
+<label>Social media negatively affects your work/studies</label>
+<select name="sm_negative" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+</div>
+
+<div class="break">You are doing well. Continue.</div>
+
+<!-- ================= PLATFORM ================= -->
+<div class="section">
+<h3>Platform Experience</h3>
+
+<label>How realistic did the activities on snap.everyday feel?</label>
+<select name="realism" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Not at all</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 - Very much</option>
+</select>
+
+<label>How similar were these activities to your real social media experience?</label>
+<select name="similarity" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Not at all</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 - Very much</option>
+</select>
+
+<label>Were the posts morally appropriate?</label>
+<select name="moral_posts" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Not at all</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 - Very much</option>
+</select>
+
+<label>Were the comments morally appropriate?</label>
+<select name="moral_comments" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Not at all</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 - Very much</option>
+</select>
+</div>
+
+<!-- ================= ATTENTION CHECK ================= -->
+<div class="section">
+<h3></h3>
+
+<label>Please select "Often" for this question</label>
+<select name="attention_check" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">Very rarely</option>
+    <option value="2">Rarely</option>
+    <option value="3">Sometimes</option>
+    <option value="4">Often</option>
+    <option value="5">Very often</option>
+</select>
+</div>
+
+<!-- ================= IDENTITY ================= -->
+<div class="section">
+<h3>On snap.everyday feedback platform rate your agreement on feeling</h3>
+
+<label>Confident others did not know who I am</label>
+<select name="anon1" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Strongly disagree</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4 - Neutral</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7 - Strongly agree</option>
+</select>
+
+<label>My identity remained unknown to others</label>
+<select name="anon2" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Strongly disagree</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4 - Neutral</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7 - Strongly agree</option>
+</select>
+
+<label>I could be easily identified by others</label>
+<select name="anon3" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Strongly disagree</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4 - Neutral</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7 - Strongly agree</option>
+</select>
+
+<label>Others were likely to know who I am</label>
+<select name="anon4" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Strongly disagree</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4 - Neutral</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7 - Strongly agree</option>
+</select>
+
+<label>My personal identity was known by others</label>
+<select name="anon5" required>
+    <option value="" disabled selected>Select</option>
+    <option value="1">1 - Strongly disagree</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4 - Neutral</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7 - Strongly agree</option>
+</select>
+
+</div>
+
+<button type="submit">Submit</button>
+
+</form>
+</div>
+
+</body>
+</html>

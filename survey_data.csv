@@ -1,0 +1,7 @@
+participant_id,condition,completion_status,age,gender,weekday_use,weekend_use,sm_thinking,sm_urge,sm_escape,sm_control,sm_restless,sm_negative,realism,similarity,moral_posts,moral_comments,anon1,anon2,anon3,anon4,anon5,attention_check
+d29c20ca-8454-4d81-a4ba-89c0930d05d4,anonymous,1,22,Male,5+,5+,Often,,,,,,Not at all,Not at all,,,Strongly disagree,,,,,Often
+d29c20ca-8454-4d81-a4ba-89c0930d05d4,anonymous,1,22,Male,5+,5+,Often,,,,,,Not at all,Not at all,,,Strongly disagree,,,,,Often
+d29c20ca-8454-4d81-a4ba-89c0930d05d4,anonymous,1,22,Male,5+,5+,Often,,,,,,Not at all,Not at all,,,Strongly disagree,,,,,Often
+09f6d33e-8ee3-467b-9083-25b4ca0f9a62,pseudo,1,23,Male,3,2,Rarely,,,,,,4,Very much,,,Neither agree nor disagree (4),Neither agree nor disagree (4),Neither agree nor disagree (4),Neither agree nor disagree (4),Neither agree nor disagree (4),Often
+cab85999-011d-488d-922e-dd4c4e5d2e15,pseudo,1,22,Female,No hours,No hours,Very rarely,Very rarely,Very rarely,Very rarely,Very rarely,Very rarely,Not at all,Not at all,Strongly disagree (1),Strongly disagree (1),Strongly disagree (1),Strongly disagree (1),Strongly disagree (1),Very rarely,,
+323516c9-66e3-47ab-a2c0-0ea271ddd458,pseudo,1,22,male,1,1,5,2,3,2,1,1,2,3,3,1,2,7,3,2,4,4
