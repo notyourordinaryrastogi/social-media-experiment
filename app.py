@@ -5,11 +5,17 @@ import random
 import csv
 import os
 from datetime import datetime
+import requests
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxwB-PvVaHijpuRpUxZUIEv3CW0l4LF6X3GwKsJ2ceXlHa6clj2pqT6o33L6PEGxcBnIw/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
 
-
+def send_to_google_sheets(data):
+    try:
+        requests.post(GOOGLE_SCRIPT_URL, json=data)
+    except:
+        pass
 # ---------- LOAD CSV ----------
 def load_posts():
     df = pd.read_csv("posts.csv", encoding="latin1")
@@ -186,6 +192,7 @@ def feed():
 
         # ✅ correctly inside POST block
         save_data(data_row)
+        send_to_google_sheets(data_row)
 
         session["index"] = index + 1
         return redirect("/feed")
@@ -288,9 +295,9 @@ def survey():
                 writer.writeheader()
 
             writer.writerow(row)
-
+        
         return "<h2>Thank you for completing the study.</h2>"
-
+    send_to_google_sheets(row)
     return render_template("survey.html")
 
 if __name__ == "__main__":
