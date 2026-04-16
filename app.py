@@ -215,16 +215,21 @@ def survey():
     if "participant_id" not in session:
         return redirect("/login")
 
+    # ---------- GET ----------
+    if request.method == "GET":
+        return render_template("survey.html")
+
+    # ---------- POST ----------
     if request.method == "POST":
 
         participant_id = session.get("participant_id")
         condition = session.get("condition")
 
-        # ---------- DEMOGRAPHICS ----------
+        # DEMOGRAPHICS
         age = request.form.get("age")
         gender = request.form.get("gender")
 
-        # ---------- USAGE ----------
+        # USAGE
         weekday_use = request.form.get("weekday_use")
         weekend_use = request.form.get("weekend_use")
 
@@ -235,29 +240,28 @@ def survey():
         sm_restless = request.form.get("sm_restless")
         sm_negative = request.form.get("sm_negative")
 
-        # ---------- PLATFORM PERCEPTION ----------
+        # PLATFORM
         realism = request.form.get("realism")
         similarity = request.form.get("similarity")
         moral_posts = request.form.get("moral_posts")
         moral_comments = request.form.get("moral_comments")
 
-        # ---------- IDENTITY SCALE ----------
+        # IDENTITY
         anon1 = request.form.get("anon1")
         anon2 = request.form.get("anon2")
         anon3 = request.form.get("anon3")
         anon4 = request.form.get("anon4")
         anon5 = request.form.get("anon5")
 
-        # ---------- ATTENTION CHECK ----------
+        # ATTENTION
         attention_check = request.form.get("attention_check")
 
-        # ---------- COMPLETION STATUS ----------
-        completion_status = 1  # completed
-
+        # FINAL ROW
         row = {
+            "type": "survey",
             "participant_id": participant_id,
             "condition": condition,
-            "completion_status": completion_status,
+            "completion_status": 1,
 
             "age": age,
             "gender": gender,
@@ -286,18 +290,20 @@ def survey():
             "attention_check": attention_check
         }
 
+        # SAVE LOCAL
         file_exists = os.path.isfile("survey_data.csv")
-
         with open("survey_data.csv", "a", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=row.keys())
-
             if not file_exists:
                 writer.writeheader()
-
             writer.writerow(row)
-        
+
+        # SEND TO GOOGLE SHEETS (ONLY HERE)
+        send_to_google_sheets(row)
+
         return "<h2>Thank you for completing the study.</h2>"
-    send_to_google_sheets(row)
+
+    # For GET request, show the survey page
     return render_template("survey.html")
 
 if __name__ == "__main__":
