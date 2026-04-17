@@ -26,7 +26,21 @@ def load_posts():
     posts = df.to_dict(orient="records")
 
     for post in posts:
-        post["comments"] = post["comments"].split("|")
+        comments_list = post["comments"].split("|")
+
+        parsed_comments = []
+        for c in comments_list:
+            if "::" in c:
+                user, text = c.split("::", 1)
+            else:
+                user, text = "user", c  # fallback
+
+            parsed_comments.append({
+                "user": user,
+                "text": text
+            })
+
+        post["comments"] = parsed_comments
 
     return posts
 
