@@ -9,7 +9,7 @@
     <style>
     body {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ FIXED FONT */
+        font-family: "Segoe UI"; /* ✅ FIXED FONT */
         min-height: 100vh;
     }
 
@@ -184,8 +184,12 @@
             padding: 8px;
         }
 
-        .scale label {
-            font-size: 13px;
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+            padding: 0 5px;
         }
 
         .logo img {
@@ -282,7 +286,12 @@
     <form method="POST" class="rating">
 
         <p><strong>How harmful is this social media interaction?</strong></p>
-        <p style="font-size: 12px;">No harm at all ----------------------------->----------------------------- A great deal of harm</p>
+
+        <!-- ✅ Labels aligned with scale -->
+        <div class="scale-labels">
+            <span>No harm at all</span>
+            <span>A great deal of harm</span>
+        </div>
 
         <div class="scale">
             {% for i in range(1,8) %}

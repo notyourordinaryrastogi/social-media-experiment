@@ -196,7 +196,7 @@ def feed():
 
         # ✅ correctly inside POST block
         save_data(data_row)
-        send_to_google_sheets(data_row)
+        send_to_google_sheets_async(data_row)
 
         session["index"] = index + 1
         return redirect("/feed")
@@ -327,7 +327,7 @@ def survey():
             writer.writerow(row)
 
         # SEND TO GOOGLE SHEETS (ONLY HERE)
-        send_to_google_sheets(row)
+        send_to_google_sheets_async(row)
 
         return "<h2>Thank you for completing the study.</h2>"
 
