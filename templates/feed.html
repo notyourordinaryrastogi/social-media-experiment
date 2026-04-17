@@ -109,25 +109,33 @@
 
     /* ✅ UPDATED: comment style + heart icon */
     .comment-box {
-        background: #f3f3f3;
-        padding: 10px;
+        background: #f0f0f0;
+        padding: 10px 12px;
         margin-bottom: 8px;
         border-radius: 12px;
         font-size: 14px;
 
         display: flex;
+        align-items: flex-start;
         justify-content: space-between;
-        align-items: center;
     }
 
-    .comment-text strong {
+    .comment-text-wrapper {
+        display: inline;
+    }
+
+    .comment-user {
         font-weight: 600;
-        margin-right: 5px;
+        margin-right: 6px;
+    }
+
+    .comment-text {
+        word-break: break-word;
     }
 
     .comment-like {
-        font-size: 13px;
-        color: #999;
+        margin-left: 10px;
+        flex-shrink: 0;
     }
 
     /* RATING */
@@ -293,11 +301,12 @@
         💬 {{ post.comment_count }}
     </div>
 
-    {% for c in post.comments %}
     <div class="comment-box">
-        <strong>{{ c.user }}</strong> {{ c.text }}
+    <div class="comment-content">
+        <span class="comment-user">{{ c.user }}</span>
+        <span class="comment-text">{{ c.text }}</span>
     </div>
-    {% endfor %}
+    </div>
 
     <form method="POST" class="rating">
 
