@@ -304,7 +304,7 @@ def survey():
             "anon4": anon4,
             "anon5": anon5,
 
-            "attention_check": attention_check
+            "attention_check": attention_check,
 
             "ec1": ec1,
             "ec2": ec2,
@@ -315,7 +315,7 @@ def survey():
             "pt3": pt3,
             "pt4": pt4,
 
-            "attention_check2": attention_check2
+            "attention_check2": attention_check2,
         }
 
         # SAVE LOCAL
