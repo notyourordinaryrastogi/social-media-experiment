@@ -25,7 +25,8 @@ def load_posts():
     df = pd.read_csv("posts.csv", encoding="latin1")
     posts = df.to_dict(orient="records")
 
-    for post in posts:
+    for post in posts:   # ✅ THIS LOOP WAS MISSING
+
         comments_list = post["comments"].split("|")
 
         parsed_comments = []
@@ -33,11 +34,12 @@ def load_posts():
             if "::" in c:
                 user, text = c.split("::", 1)
             else:
-                user, text = "user", c  # fallback
+                user = "user"
+                text = c
 
             parsed_comments.append({
-                "user": user,
-                "text": text
+                "user": user.strip(),
+                "text": text.strip()
             })
 
         post["comments"] = parsed_comments

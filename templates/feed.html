@@ -293,13 +293,11 @@
         💬 {{ post.comment_count }}
     </div>
 
-    <div class="comments">
-        {% for c in post.comments %}
-            <div class="comment-box">
-                <div class="comment-text">{{ c }}</div>
-            </div>
-        {% endfor %}
+    {% for c in post.comments %}
+    <div class="comment-box">
+        <strong>{{ c.user }}</strong> {{ c.text }}
     </div>
+    {% endfor %}
 
     <form method="POST" class="rating">
 
