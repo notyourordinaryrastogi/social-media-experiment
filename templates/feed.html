@@ -3,10 +3,13 @@
 <head>
     <title>Feed</title>
 
+    <!-- ✅ ADDED: viewport for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
     body {
         margin: 0;
-        font-family: "Comic Sans MS", cursive;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ FIXED FONT */
         min-height: 100vh;
     }
 
@@ -29,111 +32,165 @@
     /* LOGO */
     .logo {
         position: fixed;
-        top: 15px;
-        right: 15px;
+        top: 10px;
+        right: 10px;
         z-index: 10;
     }
 
+
     .logo img {
-        height: 80px;
+        height: 70px;
     }
 
-    /* MAIN FEED CONTAINER */
+    /* MAIN CONTAINER */
     .feed-container {
-        max-width: 500px;
-        margin: 80px auto;
-        padding: 15px;
+        width: 92%;                 /* ✅ responsive width */
+        max-width: 520px;
+        margin: 70px auto;
+        padding: 14px;
 
-        background: rgba(255, 255, 255, 0.9); /* readability */
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 12px;
     }
 
-    /* IMAGE CONTAINER (Instagram style) */
+    /* HEADER */
+    .post-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .post-user {
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    /* ✅ ADDED: timestamp */
+    .timestamp {
+        font-size: 12px;
+        color: #777;
+        margin-left: 5px;
+    }
+
+    .participant-user {
+        font-size: 12px;
+        color: #555;
+        text-align: right;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    /* IMAGE */
     .image-container {
         width: 100%;
-        aspect-ratio: 4 / 5;   /* 🔥 Instagram portrait ratio */
+        aspect-ratio: 4 / 5;
         background-color: #000;
         overflow: hidden;
-        border-radius: 8px;
+        border-radius: 10px;
+        margin-top: 8px;
     }
 
-/* IMAGE INSIDE CONTAINER */
     .image-container img {
         width: 100%;
         height: 100%;
-        object-fit: contain;   /* shows full image */
+        object-fit: contain;
     }
 
+    /* META */
     .meta {
         margin-top: 8px;
         font-size: 14px;
     }
 
+    /* COMMENTS */
     .comments {
-        margin-top: 10px;
+        margin-top: 12px;
+    }
+
+    /* ✅ UPDATED: comment style + heart icon */
+    .comment-box {
+        background: #f3f3f3;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 12px;
+        font-size: 14px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .comment-text {
+        flex: 1;
+        margin-right: 8px;
+    }
+
+    .comment-like {
+        font-size: 13px;
+        color: #999;
     }
 
     /* RATING */
     .rating {
-        margin-top: 20px;
+        margin-top: 18px;
     }
 
     .scale {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
     }
 
+    .scale label {
+        font-size: 14px;
+    }
+
+    /* BUTTON */
     button {
         width: 100%;
         margin-top: 15px;
         padding: 12px;
-        font-family: "Comic Sans MS", cursive;
         font-size: 16px;
         cursor: pointer;
-    }
-    .comment-box {
-        background: #f0f0f0;
-        padding: 10px 12px;
-        margin-bottom: 8px;
-        border-radius: 12px;
-        font-size: 14px;
-    }
-    /* HEADER ALIGNMENT (FIXED) */
-    .post-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+        border-radius: 8px;
+        border: none;
+        background-color: #222;
+        color: white;
     }
 
-    .post-user {
-        font-weight: bold;
-        font-size: 16px;
-        color: #000;
-    }
-
-    .participant-user {
-        font-size: 13px;
-        color: #555;   /* dark gray */
-        text-align: right;
-        font-weight: bold;
-        font-style: italic;
-    }
-    /* MOBILE OPTIMIZATION */
+    /* ✅ MOBILE IMPROVEMENTS */
     @media (max-width: 600px) {
+
         .feed-container {
-            margin: 60px 10px;
-            padding: 10px;
+            width: 95%;
+            margin: 60px auto;
+            padding: 12px;
         }
 
-        .post img {
-            height: 250px;
+        .image-container {
+            aspect-ratio: 1 / 1;   /* ✅ better for phones */
+        }
+
+        .post-user {
+            font-size: 14px;
+        }
+
+        .participant-user {
+            font-size: 11px;
+        }
+
+        .comment-box {
+            font-size: 13px;
+            padding: 8px;
+        }
+
+        .scale label {
+            font-size: 13px;
         }
 
         .logo img {
-            height: 60px;
+            height: 55px;
         }
-    
     }
 </style>
 </head>
@@ -186,7 +243,8 @@
 
     <!-- LEFT: post author -->
         <div class="post-user">
-            {{ post.username }}
+            <span class="post-user">{{ post.username }}</span>
+            <span class="timestamp">• 2h ago</span> <!-- ✅ STATIC for now -->
         </div>
 
     <!-- RIGHT: participant identity -->
@@ -215,7 +273,8 @@
     <div class="comments">
         {% for c in post.comments %}
             <div class="comment-box">
-                {{ c }}
+                <div class="comment-text">{{ c }}</div>
+                <div class="comment-like">❤️</div> <!-- ✅ added -->
             </div>
         {% endfor %}
     </div>

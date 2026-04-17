@@ -6,16 +6,20 @@ import csv
 import os
 from datetime import datetime
 import requests
+import threading
 GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxwB-PvVaHijpuRpUxZUIEv3CW0l4LF6X3GwKsJ2ceXlHa6clj2pqT6o33L6PEGxcBnIw/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
 
-def send_to_google_sheets(data):
-    try:
-        requests.post(GOOGLE_SCRIPT_URL, json=data)
-    except:
-        pass
+def send_to_google_sheets_async(data):
+    def task():
+        try:
+            requests.post(GOOGLE_SCRIPT_URL, json=data)
+        except:
+            pass
+    threading.Thread(target=task).start()
+
 # ---------- LOAD CSV ----------
 def load_posts():
     df = pd.read_csv("posts.csv", encoding="latin1")
@@ -256,6 +260,19 @@ def survey():
         # ATTENTION
         attention_check = request.form.get("attention_check")
 
+        #IRI
+        ec1 = request.form.get("ec1")
+        ec2 = request.form.get("ec2")
+        ec3 = request.form.get("ec3")
+        ec4 = request.form.get("ec4")
+
+        pt1 = request.form.get("pt1")
+        pt2 = request.form.get("pt2")
+        pt3 = request.form.get("pt3")
+        pt4 = request.form.get("pt4")
+
+        attention_check2 = request.form.get("attention_check2")
+
         # FINAL ROW
         row = {
             "type": "survey",
@@ -288,6 +305,17 @@ def survey():
             "anon5": anon5,
 
             "attention_check": attention_check
+
+            "ec1": ec1,
+            "ec2": ec2,
+            "ec3": ec3,
+            "ec4": ec4,
+            "pt1": pt1,
+            "pt2": pt2,
+            "pt3": pt3,
+            "pt4": pt4,
+
+            "attention_check2": attention_check2
         }
 
         # SAVE LOCAL
