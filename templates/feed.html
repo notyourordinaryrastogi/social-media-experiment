@@ -138,11 +138,23 @@
     .scale {
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+        width: 100%;
     }
 
-    .scale label {
-        font-size: 14px;
+    .scale-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .left-label {
+        text-align: left;
+    }
+
+    .right-label {
+        text-align: right;
     }
 
     /* BUTTON */
@@ -184,12 +196,19 @@
             padding: 8px;
         }
 
+        @media (max-width: 600px) {
+
         .scale-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            margin-bottom: 5px;
-            padding: 0 5px;
+            font-size: 11px;      /* slightly smaller */
+            line-height: 1.2;
+        }
+
+        .scale {
+            gap: 6px;             /* adds spacing between numbers */
+        }
+
+        .scale label {
+            font-size: 13px;
         }
 
         .logo img {
@@ -289,8 +308,8 @@
 
         <!-- ✅ Labels aligned with scale -->
         <div class="scale-labels">
-            <span>No harm at all</span>
-            <span>A great deal of harm</span>
+            <span class="left-label">No harm at all</span>
+            <span class="right-label">A great deal of harm</span>
         </div>
 
         <div class="scale">
