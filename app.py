@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import requests
 import threading
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKoAGGZDh83kbcv83Amq9Cml_EGChUBQzdGyai6sn8Z6eanOeMldZ4JNKztKVnNbfxdw/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxo82X8ahZ0frLRo6d_-UVYieX0Tc8smQoTRobeQzlUZXTv0jUoJfpmoiXpMK0FazLf3g/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
