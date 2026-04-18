@@ -212,7 +212,12 @@ def feed():
 
         # ✅ correctly inside POST block
         data_row["type"] = "experiment"
-        send_to_google_sheets_async(data_row)
+        try:
+            response = requests.post(GOOGLE_SCRIPT_URL, json=data_row)
+            print("EXPERIMENT SENT:", response.status_code)
+            print(response.text)
+        except Exception as e:
+            print("EXPERIMENT ERROR:", e)
 
         session["index"] = index + 1
         return redirect("/feed")
@@ -346,7 +351,12 @@ def survey():
 
         # SEND TO GOOGLE SHEETS (ONLY HERE)
         row["type"] = "survey"
-        send_to_google_sheets_async(row)
+        try:
+            response = requests.post(GOOGLE_SCRIPT_URL, json=row)
+            print("SURVEY SENT:", response.status_code)
+            print(response.text)
+        except Exception as e:
+            print("SURVEY ERROR:", e)
 
         return "<h2>Thank you for completing the study.</h2>"
 
