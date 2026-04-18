@@ -288,7 +288,7 @@ def survey():
         pt4 = request.form.get("pt4")
 
         attention_check2 = request.form.get("attention_check2")
-        feedback = request.form.get("feedback")
+        
 
         # FINAL ROW
         row = {
@@ -333,7 +333,7 @@ def survey():
             "pt4": pt4,
 
             "attention_check2": attention_check2,
-            "feedback": feedback, 
+             
         }
 
         # SAVE LOCAL
