@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import requests
 import threading
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxo82X8ahZ0frLRo6d_-UVYieX0Tc8smQoTRobeQzlUZXTv0jUoJfpmoiXpMK0FazLf3g/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6jsx4tZGKkqjN-030OFxEoF7VHco_kr2aHVN59Qj9Nw2n4c8CUp-RHc5qkHUinY4gCw/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
@@ -212,12 +212,7 @@ def feed():
 
         # ✅ correctly inside POST block
         data_row["type"] = "experiment"
-        try:
-            response = requests.post(GOOGLE_SCRIPT_URL, json=data_row)
-            print("EXPERIMENT SENT:", response.status_code)
-            print(response.text)
-        except Exception as e:
-            print("EXPERIMENT ERROR:", e)
+        send_to_google_sheets_async(row)
 
         session["index"] = index + 1
         return redirect("/feed")
@@ -351,12 +346,7 @@ def survey():
 
         # SEND TO GOOGLE SHEETS (ONLY HERE)
         row["type"] = "survey"
-        try:
-            response = requests.post(GOOGLE_SCRIPT_URL, json=row)
-            print("SURVEY SENT:", response.status_code)
-            print(response.text)
-        except Exception as e:
-            print("SURVEY ERROR:", e)
+        send_to_google_sheets_async(row)
 
         return "<h2>Thank you for completing the study.</h2>"
 
