@@ -195,6 +195,7 @@ def feed():
             rating = None
 
         data_row = {
+            "type": "experiment",   # 🔥 put it INSIDE dict
             "participant_id": participant_id,
             "trial_number": trial_number,
             "timestamp": timestamp,
