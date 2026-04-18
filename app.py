@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import requests
 import threading
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6jsx4tZGKkqjN-030OFxEoF7VHco_kr2aHVN59Qj9Nw2n4c8CUp-RHc5qkHUinY4gCw/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6EsgOeZqvINDbrEgTncpAoWKI5t6F9InMWa39l-UBob4HbW2yRav-Q6WWKQb7unoovA/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
@@ -212,7 +212,7 @@ def feed():
 
         # ✅ correctly inside POST block
         data_row["type"] = "experiment"
-        send_to_google_sheets_async(row)
+        send_to_google_sheets_async(data_row)
 
         session["index"] = index + 1
         return redirect("/feed")
