@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import requests
 
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLYG2VKwMrJfdf00yb3_k5jJhlpji6jF8llC6gLCN_ON4_uZmF3uioW_bNSpjo8LCM/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7pqW8GFge-YllwTSWpuKL3K8ep9-RAfEv3lDCu42pzg6ySRnOYl2MB80JPBkpA0sF/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
@@ -135,14 +135,20 @@ def feed():
         total_time_elapsed = current_epoch - session_start_epoch
 
         # ---------- CLEAN ----------
-        try: rating = int(rating)
-        except: rating = None
+        try: 
+            rating = int(rating)
+        except: 
+            rating = ""  # Send empty string instead of None
 
-        try: dwell_time = int(dwell_time)
-        except: dwell_time = 0
+        try: 
+            dwell_time = int(dwell_time)
+        except: 
+            dwell_time = 0
 
-        try: reaction_time = int(reaction_time)
-        except: reaction_time = 0
+        try: 
+            reaction_time = int(reaction_time)
+        except: 
+            reaction_time = 0
 
         # ---------- FINAL ROW ----------
         data_row = {
@@ -155,8 +161,8 @@ def feed():
             "device_type": device_type,
             "username": username,
             "condition": condition,
-            "post_id": post_id,
-            "condition_tag": condition_tag,
+            "post_id": post_id if post_id else "unknown", # Ensure not None
+            "condition_tag": condition_tag if condition_tag else "none",
             "rating": rating,
             "dwell_time_ms": dwell_time,
             "reaction_time_ms": reaction_time
