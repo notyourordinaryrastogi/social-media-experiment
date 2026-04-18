@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 import requests
 
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw48fD-Fk3p7DMUR17RfhT_6lztDVqCYwquFeH6B_LwEl2s7FGBjGqZd8yvQ4knrfhIGw/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfav-kzjDzAaqEFk3oe0CMMhC2AQz_sB6rdQFHMvUUi5iYujahw_gcT3k80krjz6-kmQ/exec"
 
 app = Flask(__name__)
 app.secret_key = "secret123"
